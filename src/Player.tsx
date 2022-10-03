@@ -1,6 +1,12 @@
 import React from "react";
-
-class Player extends React.Component {
+interface PlayerProps {
+  game?: string;
+}
+class Player extends React.Component<PlayerProps> {
+  constructor(props: PlayerProps | Readonly<PlayerProps>) {
+    super(props);
+    this.state = {};
+  }
   componentDidMount(): void {
     const script = document.createElement("script");
     script.src = "./player.js";
@@ -8,14 +14,12 @@ class Player extends React.Component {
 
     const scripts = document.getElementsByTagName("script");
 
-    let found: boolean = false;
-    for (let i = 0; i < scripts.length; i++) {
-      if (scripts[i].src === script.src) {
-        found = true;
-      }
-    }
+    let scriptList: HTMLScriptElement[] = Array.from(scripts);
+
+    let found = scriptList.find((element) => element.src === script.src);
 
     if (!found) document.body.appendChild(script);
+
   }
 
   render(): React.ReactNode {

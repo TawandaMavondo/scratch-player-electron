@@ -11,7 +11,7 @@ class App extends React.Component {
           <title>Scratch Player Electron</title>
         </Helmet>
         <h3>Scratch Player </h3>
-        <Player />
+        <Player game="gb.sb3" />
       </div>
     );
   }
