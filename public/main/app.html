@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="phosphorus.css">
+    <link rel="stylesheet" href="studioview/studioview.css">
+    <title>Document</title>
+    <style>
+        body {
+            /* background: #000; */
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .player {
+            position: absolute;
+        }
+
+        .splash,
+        .error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: table;
+            color: #fff;
+            cursor: default;
+        }
+
+        .error {
+            display: none;
+        }
+
+        .splash>div,
+        .error>div {
+            display: table-cell;
+            height: 100%;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .progress {
+            width: 80%;
+            height: 16px;
+            border: 1px solid #fff;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            background: #fff;
+            width: 10%;
+            height: 100%;
+        }
+
+        h1 {
+            font: 300 72px Helvetica Neue, Helvetica, Arial, sans-serif;
+            margin: 0 0 16px;
+        }
+
+        p {
+            font: 300 24px/1.5 Helvetica Neue, Helvetica, Arial, sans-serif;
+            margin: 0;
+            color: rgba(255, 255, 255, .6);
+        }
+
+        .error a {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="area" id="player-area"></div>
+
+    <script src="lib/scratch-sb1-converter.js"></script>
+    <script src="lib/jszip.min.js"></script>
+    <script src="lib/fontfaceobserver.standalone.js"></script>
+    <script src="lib/canvg.min.js"></script>
+    <script src="lib/purify.min.js"></script>
+    <script src="phosphorus.dist.js"></script>
+    <script src="common.js"></script>
+    <script src="studioview/studioview.js"></script>
+
+    <script>
+        P.i18n.addTranslations('en', {
+            'studioview.authorAttribution': 'by $author',
+            'studioview.projectHoverText': '$title by $author',
+            'index.document.title': 'forkphorus - phosphorus for Scratch 3',
+            'index.report': 'Report a problem',
+            'index.embed': 'Embed this project',
+            'index.package': 'Package this project',
+            'index.settings': 'Settings',
+            'index.credits': 'Credits',
+            'index.code': 'Code',
+            'index.studio.view': 'View studio on Scratch.',
+            'index.package.button': 'Package',
+            'index.package.turbo': 'Turbo mode',
+            'index.package.controls': 'Controls',
+            'index.package.fullscreen': 'Full screen',
+            'index.package.480': '480\u00D7360',
+            'index.package.custom': 'Other:',
+            'index.package.divider': '\u00D7',
+            'index.embed.description': 'Include the forkphorus player in your web site.',
+            'index.embed.autostart': 'Start automatically',
+            'index.embed.lightControls': 'Light controls',
+            'index.embed.hideUI': 'Hide UI',
+            'index.advanced': 'Advanced Settings',
+            'index.advanced.confirmation': 'This will refresh this page, resetting the project. Continue?',
+            'index.privacy': 'Privacy Policy',
+        });
+    </script>
+
+
+
+    <script>
+        // function () {
+        // "use strict"
+        var playerArea = document.querySelector('#player-area');
+        function loadProjectFile(file) {
+            var extension = file.name.split('.').pop();
+            if (!['sb', 'sb2', 'sb3'].includes(extension)) {
+                return;
+            }
+            player.loadProjectFromFile(file);
+        }
+
+        var player = new P.player.Player();
+        player.addControls();
+
+        playerArea.appendChild(player.root);
+        window.player = player;
+        // playerArea.style.height = projectArea.style.height = 'auto';
+        var file = null;
+        var client = new XMLHttpRequest()
+        var GetFileBlobUsingURL = function (url, convertBlob) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.responseType = "blob";
+            xhr.addEventListener('load', function () {
+                convertBlob(xhr.response);
+            });
+            xhr.send();
+        };
+
+        var blobToFile = function (blob, name) {
+            blob.lastModifiedDate = new Date();
+            blob.name = name;
+            return blob;
+        };
+
+        var GetFileObjectFromURL = function (filePathOrUrl, convertBlob) {
+            GetFileBlobUsingURL(filePathOrUrl, function (blob) {
+                convertBlob(blobToFile(blob, filePathOrUrl));
+            });
+        };
+        var FileURL = "fruitNinja.sb2";
+        GetFileObjectFromURL(FileURL, function (fileObject) {
+            player.loadProjectFromFile(fileObject);
+        });
+        // }
+    </script>
+</body>
+
+</html
