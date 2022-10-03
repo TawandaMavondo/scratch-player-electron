@@ -18,7 +18,6 @@ class Player extends React.Component {
     if (!found) document.body.appendChild(script);
   }
 
-  componentWillUnmount(): void {}
   render(): React.ReactNode {
     return (
       <>

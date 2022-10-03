@@ -9,7 +9,8 @@ function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 800,
+    darkTheme: true,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -21,10 +22,8 @@ function createWindow() {
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
-
-  // win.loadURL("http://localhost:3000");
+  win.webContents.openDevTools();
 }
-
 app.on("ready", createWindow);
 
 // Quit when all windows are closed.
