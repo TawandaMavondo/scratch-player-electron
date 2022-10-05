@@ -82,7 +82,6 @@ const Header = styled.div`
   margin-bottom: 40px;
   height: 90px;
   background: #f9dfb7;
-  
 `;
 
 const HeaderImage = styled.img`
@@ -117,6 +116,7 @@ const SideNav = styled(Col)`
   padding: 20px;
   text-align: center;
   width: 270px;
+  height: 670px;
 `;
 
 const SideNavTitle = styled.h3`
@@ -166,7 +166,7 @@ const SideNavProgressBar = styled.progress`
 // const SideNavItem = styled.li``;
 const MainContent = styled(Col)`
   height: 100vh;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 const MainContentSection = styled.div`
@@ -186,15 +186,27 @@ const SectionTitle = styled.h1`
   color: #291a63;
 `;
 
+const BackToGames = styled.a`
+  font-family: "Avenir Next";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #291a63;
+  display: block;
+  padding-left: 60px;
+  padding-bottom: 30px;
+`;
 const GamePage: React.FC = () => {
   return (
-    <>
+    <div style={{ height: "100vh", overflowY: "scroll" }}>
       <Header>
         <HeaderImage src={headerBackgroundImage} alt="" />
         <HomeIcon />
         <MenuButton />
       </Header>
       <Container className="mt-5">
+        <BackToGames>Go Back To All Games</BackToGames>
         <Row>
           <SideNav sm={"3"}>
             <SideNavTitle>Ghost Busters</SideNavTitle>
@@ -202,7 +214,7 @@ const GamePage: React.FC = () => {
             <SideNavProgressBarContainer>
               <SideNavProgressBar max={100} value={10}></SideNavProgressBar>
             </SideNavProgressBarContainer>
-            <div className="mt-3" style={{ overflowY: "auto" }}>
+            <div className="mt-3">
               {SideNavItems.map((it, i) => (
                 <SideNavItem key={i} {...it} />
               ))}
@@ -243,7 +255,7 @@ const GamePage: React.FC = () => {
           </MainContent>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

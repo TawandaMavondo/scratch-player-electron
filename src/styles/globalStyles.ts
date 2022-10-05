@@ -7,6 +7,9 @@ const globalStyles = createGlobalStyle({
 
   p: {
     color: "#291A63",
+    fontWeight: 400,
+    fontSize: "18px",
+    lineHeight: "25px",
   },
 });
 

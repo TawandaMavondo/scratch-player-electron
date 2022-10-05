@@ -25,7 +25,7 @@ class Player extends React.Component<PlayerProps> {
   render(): React.ReactNode {
     return (
       <>
-        <div className="area" id="player-area"></div>
+        <div className="area mx-auto" id="player-area"></div>
       </>
     );
   }
