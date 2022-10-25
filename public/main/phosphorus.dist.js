@@ -3743,7 +3743,7 @@ var P;
             }
         }
         Player.DEFAULT_OPTIONS = {
-            autoplayPolicy: 'always',
+            autoplayPolicy: 'never',
             cloudVariables: 'ws',
             fps: 30,
             theme: 'light',

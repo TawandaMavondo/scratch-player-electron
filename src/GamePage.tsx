@@ -8,8 +8,8 @@ import completedIcon from "./assets/completed-task-icon.svg";
 import incompletedIcon from "./assets/incomplete-task-icon.svg";
 import challengeIcon from "./assets/challenge-task-icon.svg";
 import Player from "./Player";
-
-enum Status {
+import common from "./common";
+export enum Status {
   Completed,
   Pending,
   Challenge,
@@ -250,7 +250,10 @@ const GamePage: React.FC = () => {
               </p>
             </MainContentSection>
             <MainContentSection>
-              <Player />
+              <Player game={common.paths.fruitNinja} />
+            </MainContentSection>
+            <MainContentSection>
+              <Player game={common.paths.ghostBusters} />
             </MainContentSection>
           </MainContent>
         </Row>
@@ -259,7 +262,7 @@ const GamePage: React.FC = () => {
   );
 };
 
-const SideNavItem: React.FC<any> = (props: ISideNav) => {
+const SideNavItem: React.FC<ISideNav> = (props: ISideNav) => {
   const getIcon = (status: Status) => {
     switch (status) {
       case Status.Completed:

@@ -1,20 +1,14 @@
-// "use strict"
-var playerArea = document.querySelector("#player-area");
-function loadProjectFile(file) {
-  var extension = file.name.split(".").pop();
-  if (!["sb", "sb2", "sb3"].includes(extension)) {
-    return;
-  }
-  player.loadProjectFromFile(file);
-}
+var playerAreas = document.querySelectorAll("#player-area");
 
-var player = new P.player.Player();
-player.addControls();
+// Initialize the Player
+let getPlayerInstance = function () {
+  let player = new P.player.Player();
+  player.addControls();
+  return player;
+};
 
-playerArea.appendChild(player.root);
+// playerArea.appendChild(getPlayerInstance().root);
 
-window.player = player;
-// playerArea.style.height = projectArea.style.height = 'auto';
 var GetFileBlobUsingURL = function (url, convertBlob) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url);
@@ -36,7 +30,14 @@ var GetFileObjectFromURL = function (filePathOrUrl, convertBlob) {
     convertBlob(blobToFile(blob, filePathOrUrl));
   });
 };
-var FileURL = "main/gb.sb3";
-GetFileObjectFromURL(FileURL, function (fileObject) {
-  player.loadProjectFromFile(fileObject);
+
+playerAreas.forEach((it) => {
+  let path = it.dataset.gamePath;
+  let player = getPlayerInstance();
+  player.options.autoplayPolicy = "never"
+  GetFileObjectFromURL(path, function (fileObject) {
+    player.loadProjectFromFile(fileObject);
+  });
+  console.log(player);
+  it.appendChild(player.root);
 });

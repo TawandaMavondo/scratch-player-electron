@@ -19,13 +19,16 @@ class Player extends React.Component<PlayerProps> {
     let found = scriptList.find((element) => element.src === script.src);
 
     if (!found) document.body.appendChild(script);
-
   }
 
   render(): React.ReactNode {
     return (
       <>
-        <div className="area mx-auto" id="player-area"></div>
+        <div
+          data-game-path={this.props.game}
+          className="area mx-auto"
+          id="player-area"
+        ></div>
       </>
     );
   }
